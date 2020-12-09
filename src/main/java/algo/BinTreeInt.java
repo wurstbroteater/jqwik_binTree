@@ -178,10 +178,10 @@ public class BinTreeInt{
 	public double sum() {
 		ArrayList<Integer> lst = (ArrayList<Integer>) toList();
 		
-		if (root == null && lst.size() == 0) {
+		if (root == null || lst.size() == 0) {
 			return 0.0;
 		} else {
-			return lst.stream().reduce(lst.get(0),(total, act) -> total + act);
+			return lst.stream().reduce(0,(total, act) -> total + act);
 		}
 
 	}
