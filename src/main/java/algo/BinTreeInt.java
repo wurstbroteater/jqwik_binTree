@@ -68,23 +68,34 @@ public class BinTreeInt{
 
 		if (val < act.val) {
 			act.left = remove(val, act.left);
-		} else if (val < act.val) {
+		} else if (val > act.val) {
 			act.right = remove(val, act.right);
 		} else {
-			size--;
-			if (isLeaf(act)) {
-				return null;
-			} else if (act.right == null) {
-				return act.left;
-			} else if (act.left == null) {
-				return act.right;
+			//remove
+			if(act.occurance > 0) {
+				//remove duplicate
+				act.occurance--;
+				duplicates--;
 			} else {
-				// remain order
-				int min = findMinimum(act.right);
-				act.right = deleteMinimum(act.right);
+				size--;
+				if (isLeaf(act)) {
+					return null;
+				} else if (act.right == null) {
+					return act.left;
+				} else if (act.left == null) {
+					return act.right;
+				} else {
+					// remain order
+					int min = findMinimum(act.right);
+					act.right = deleteMinimum(act.right);
 
-				act = new Node(min, act.left, act.right);
+					act = new Node(min, act.left, act.right);
+
+
+				}
 			}
+
+
 		}
 
 		return act;
@@ -175,11 +186,11 @@ public class BinTreeInt{
 		return lst;
 	}
 
-	public double sum() {
+	public int sum() {
 		ArrayList<Integer> lst = (ArrayList<Integer>) toList();
 		
 		if (root == null || lst.size() == 0) {
-			return 0.0;
+			return 0;
 		} else {
 			return lst.stream().reduce(0,(total, act) -> total + act);
 		}
