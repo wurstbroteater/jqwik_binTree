@@ -130,7 +130,7 @@ public class BinTreeInt{
 		}
 		if ( act.val== val) {
 			return act.occurance;
-		} else if (act.val - val> 0) {
+		} else if (act.val > val) {
 			return count(val, act.left);
 		} else {
 			return count(val, act.right);
